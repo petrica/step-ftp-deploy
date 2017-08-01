@@ -15,6 +15,7 @@ Another case is that a file is deleted before the files referring to it are upda
 * `password` (required) Password to connect to FTP server
 * `remote-file` (optional, default is a *remote.txt*) It is a list of md5sum and filename (one filename in one row). It is should be kept synchronized with files. If it loses synchronization, simple remove all files from destination and they will be uploaded again and *remote.txt* regenerated.
 * `timeout` (optional, default is 20) Since uploading large number of files may take a long time you can define TIMEOUT when to stop before wercker stops the script. 
+* `source` (optional, default to $WERCKER_SOURCE_DIR) source folder to be copied to FTP
 
 # Example
 
@@ -24,6 +25,7 @@ Add PASSWORD as protected environment variable. Other options can be hardcoded.
 deploy:
   steps:
     - duleorlovic/ftp-deploy:
+    	source: $WERCKER_SOURCE_DIR/build
         destination: ftp://domain.example.com/site/public_html
         username: ftpusername
         password: $PASSWORD
@@ -56,6 +58,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # Changelog
 
 
-## 0.0.1
+## 1.0.0
 
 - Initial release
